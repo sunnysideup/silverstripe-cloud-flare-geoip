@@ -1,6 +1,6 @@
 <?php
 
-namespace Sunnysideup\CloudFlare;
+namespace Sunnysideup\CloudFlare\Api;
 
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\Director;
