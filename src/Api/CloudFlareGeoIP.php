@@ -41,7 +41,10 @@ class CloudFlareGeoIP extends Geoip
             return $returnValue;
         }
         $name = parent::countryCode2name($returnValue);
-        return ['code' => $returnValue, 'name' => $name];
+        return [
+            'code' => $returnValue,
+            'name' => $name,
+        ];
     }
 
     /**
