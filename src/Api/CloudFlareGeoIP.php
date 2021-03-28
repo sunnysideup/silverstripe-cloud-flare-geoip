@@ -70,13 +70,13 @@ class CloudFlareGeoIP extends Geoip
             }
             $code = Controller::curr()->getRequest()->getSession()->get('MyCloudFlareCountry');
             if (! $code) {
-                if ($address = self::get_remote_address()) {
-                    $code = CloudFlareGeoip::ip2country($address, true);
+                if (($address = self::get_remote_address()) !== '') {
+                    $code = \Sunnysideup\CloudFlare\Api\CloudFlareGeoIP::ip2country($address, true);
                 }
                 if (! $code) {
                     $code = self::get_default_country_code();
                 }
-                if (! $code) {
+                if ($code === '') {
                     $code = Config::inst()->get('CloudFlareGeoip', 'default_country_code');
                 }
                 Controller::curr()->getRequest()->getSession()->set('MyCloudFlareCountry', $code);
