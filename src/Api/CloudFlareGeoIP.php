@@ -7,6 +7,8 @@ use SilverStripe\Control\Director;
 use SilverStripe\Core\Config\Config;
 use Sunnysideup\Geoip\Geoip;
 
+use Sunnysideup\CloudFlare\Api\CloudFlareGeoIP;
+
 class CloudFlareGeoIP extends Geoip
 {
     private static $debug_email = '';
@@ -70,8 +72,9 @@ class CloudFlareGeoIP extends Geoip
             }
             $code = Controller::curr()->getRequest()->getSession()->get('MyCloudFlareCountry');
             if (! $code) {
-                if (($address = self::get_remote_address()) !== '') {
-                    $code = \Sunnysideup\CloudFlare\Api\CloudFlareGeoIP::ip2country($address, true);
+                $address = self::get_remote_address();
+                if (strlen($address) > 3) {
+                    $code = CloudFlareGeoIP::ip2country($address, true);
                 }
                 if (! $code) {
                     $code = self::get_default_country_code();
