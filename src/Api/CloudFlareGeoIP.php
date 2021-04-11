@@ -19,8 +19,8 @@ class CloudFlareGeoIP extends Geoip
      * To return the code only, pass in true for the
      * $codeOnly parameter.
      *
-     * @param string $address The IP address to get the country of
-     * @param boolean $codeOnly Returns just the country code
+     * @param string $address  The IP address to get the country of
+     * @param bool   $codeOnly Returns just the country code
      *
      * @return string
      */
@@ -38,9 +38,11 @@ class CloudFlareGeoIP extends Geoip
             if (is_array($returnValue)) {
                 return $returnValue['code'];
             }
+
             return $returnValue;
         }
         $name = parent::countryCode2name($returnValue);
+
         return [
             'code' => $returnValue,
             'name' => $name,
@@ -48,9 +50,9 @@ class CloudFlareGeoIP extends Geoip
     }
 
     /**
-     * Returns the country code, for the current visitor
+     * Returns the country code, for the current visitor.
      *
-     * @return string|bool
+     * @return bool|string
      */
     public static function visitor_country()
     {
@@ -76,7 +78,7 @@ class CloudFlareGeoIP extends Geoip
                 if (! $code) {
                     $code = self::get_default_country_code();
                 }
-                if ($code === '') {
+                if ('' === $code) {
                     $code = Config::inst()->get('CloudFlareGeoip', 'default_country_code');
                 }
                 Controller::curr()->getRequest()->getSession()->set('MyCloudFlareCountry', $code);
@@ -88,6 +90,7 @@ class CloudFlareGeoIP extends Geoip
 
     /**
      * @see: http://stackoverflow.com/questions/14985518/cloudflare-and-logging-visitor-ip-addresses-via-in-php
+     *
      * @return string
      */
     public static function get_remote_address()
@@ -103,6 +106,7 @@ class CloudFlareGeoIP extends Geoip
         ) {
             $ip = Controller::curr()->getRequest()->getIP();
         }
+
         return $ip;
     }
 }
