@@ -7,8 +7,6 @@ use SilverStripe\Control\Director;
 use SilverStripe\Core\Config\Config;
 use Sunnysideup\Geoip\Geoip;
 
-use Sunnysideup\CloudFlare\Api\CloudFlareGeoIP;
-
 class CloudFlareGeoIP extends Geoip
 {
     private static $debug_email = '';
