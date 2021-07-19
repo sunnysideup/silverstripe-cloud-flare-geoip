@@ -19,7 +19,7 @@
     ],
     "require": {
         "silverstripe/framework": "~4.0",
-        "sunnysideup/geoip": "^1.0"
+        "sunnysideup/geoip": "dev-master"
     },
     "extra": [],
     "autoload": {
